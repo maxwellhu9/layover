@@ -5,17 +5,13 @@
 //  Created by Maxwell Hu on 4/6/26.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
-struct TravelResult {
-    let durationSeconds: Int       // one-way travel time in seconds e.g. "900s"
-    let durationText: String       // human-readable e.g. "15 mins"
-    let distanceText: String       // e.g. "9.0 km"
-    let fitsInWindow: Bool         // true if round-trip + stay fits in play window
-}
+// MARK: - Service
 
 class RoutesService {
+
     private let apiKey: String = {
         guard let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
               let dict = NSDictionary(contentsOfFile: path),
@@ -25,7 +21,39 @@ class RoutesService {
         return key
     }()
 
-    /// Checks if a destination is reachable (round-trip + stay) within the play window.
+    /// Simple one-way travel time in seconds between two coordinates.
+    func fetchTravelSeconds(
+        from origin: CLLocationCoordinate2D,
+        to destination: CLLocationCoordinate2D,
+        completion: @escaping (Int) -> Void
+    ) {
+        let url = URL(string: "https://routes.googleapis.com/directions/v2:computeRoutes")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(apiKey, forHTTPHeaderField: "X-Goog-Api-Key")
+        request.setValue("routes.duration", forHTTPHeaderField: "X-Goog-FieldMask")
+
+        let body: [String: Any] = [
+            "origin": ["location": ["latLng": ["latitude": origin.latitude, "longitude": origin.longitude]]],
+            "destination": ["location": ["latLng": ["latitude": destination.latitude, "longitude": destination.longitude]]],
+            "travelMode": "DRIVE",
+            "routingPreference": "TRAFFIC_AWARE"
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            guard let data,
+                  let response = try? JSONDecoder().decode(RoutesResponse.self, from: data),
+                  let durationString = response.routes?.first?.duration else {
+                completion(0); return
+            }
+            let seconds = Int(durationString.dropLast()) ?? 0
+            completion(seconds)
+        }.resume()
+    }
+
+    /// Checks if a round-trip (+ stay) fits within the play window.
     func checkTravelTime(
         from origin: CLLocationCoordinate2D,
         to destination: CLLocationCoordinate2D,
@@ -60,22 +88,18 @@ class RoutesService {
 
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error {
-                completion(.failure(error))
-                return
+                completion(.failure(error)); return
             }
             guard let data else {
-                completion(.failure(RoutesServiceError.noData))
-                return
+                completion(.failure(RoutesServiceError.noData)); return
             }
             do {
                 let response = try JSONDecoder().decode(RoutesResponse.self, from: data)
 
                 guard let route = response.routes?.first else {
-                    completion(.failure(RoutesServiceError.noRoute))
-                    return
+                    completion(.failure(RoutesServiceError.noRoute)); return
                 }
 
-                // duration comes as "123s" so strip the trailing "s"
                 let durationString = route.duration ?? "0s"
                 let onewaySeconds = Int(durationString.dropLast()) ?? 0
                 let distanceMeters = route.distanceMeters ?? 0
@@ -96,7 +120,7 @@ class RoutesService {
         }.resume()
     }
 
-    // MARK: - Formatting helpers
+    // MARK: - Formatting
 
     private static func formatDuration(_ seconds: Int) -> String {
         let mins = seconds / 60
@@ -121,13 +145,13 @@ enum RoutesServiceError: Error {
     case noRoute
 }
 
-// MARK: - Decodable structs (matches Routes API v2 JSON)
+// MARK: - Private Decodable Structs
 
 private struct RoutesResponse: Decodable {
-    let routes: [Route]?
+    let routes: [RouteData]?
 }
 
-private struct Route: Decodable {
-    let duration: String?       // e.g. "903s"
-    let distanceMeters: Int?    // e.g. 8985
+private struct RouteData: Decodable {
+    let duration: String?
+    let distanceMeters: Int?
 }

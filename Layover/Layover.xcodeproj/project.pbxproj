@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1B8CB7D12F92B2F4003FAF93 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 1B8CB7D02F92B2F4003FAF93 /* Auth */; };
+		1B8CB7D32F92B2F4003FAF93 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 1B8CB7D22F92B2F4003FAF93 /* Functions */; };
+		1B8CB7D52F92B2F4003FAF93 /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 1B8CB7D42F92B2F4003FAF93 /* PostgREST */; };
+		1B8CB7D72F92B2F4003FAF93 /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 1B8CB7D62F92B2F4003FAF93 /* Realtime */; };
+		1B8CB7D92F92B2F4003FAF93 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 1B8CB7D82F92B2F4003FAF93 /* Storage */; };
+		1B8CB7DB2F92B2F4003FAF93 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B8CB7DA2F92B2F4003FAF93 /* Supabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1BE7B4AB2F80D71800F7AB5A /* Layover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Layover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +32,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B8CB7D52F92B2F4003FAF93 /* PostgREST in Frameworks */,
+				1B8CB7D32F92B2F4003FAF93 /* Functions in Frameworks */,
+				1B8CB7DB2F92B2F4003FAF93 /* Supabase in Frameworks */,
+				1B8CB7D12F92B2F4003FAF93 /* Auth in Frameworks */,
+				1B8CB7D92F92B2F4003FAF93 /* Storage in Frameworks */,
+				1B8CB7D72F92B2F4003FAF93 /* Realtime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +80,12 @@
 			);
 			name = Layover;
 			packageProductDependencies = (
+				1B8CB7D02F92B2F4003FAF93 /* Auth */,
+				1B8CB7D22F92B2F4003FAF93 /* Functions */,
+				1B8CB7D42F92B2F4003FAF93 /* PostgREST */,
+				1B8CB7D62F92B2F4003FAF93 /* Realtime */,
+				1B8CB7D82F92B2F4003FAF93 /* Storage */,
+				1B8CB7DA2F92B2F4003FAF93 /* Supabase */,
 			);
 			productName = Layover;
 			productReference = 1BE7B4AB2F80D71800F7AB5A /* Layover.app */;
@@ -94,6 +115,9 @@
 			);
 			mainGroup = 1BE7B4A22F80D71800F7AB5A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1B8CB7CF2F92B2F4003FAF93 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1BE7B4AC2F80D71800F7AB5A /* Products */;
 			projectDirPath = "";
@@ -251,8 +275,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 52L935TBQ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Layover needs your location to find nearby places you can visit during your layover.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -282,6 +308,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 52L935TBQ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -300,7 +327,6 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -328,6 +354,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1B8CB7CF2F92B2F4003FAF93 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1B8CB7D02F92B2F4003FAF93 /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B8CB7CF2F92B2F4003FAF93 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		1B8CB7D22F92B2F4003FAF93 /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B8CB7CF2F92B2F4003FAF93 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		1B8CB7D42F92B2F4003FAF93 /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B8CB7CF2F92B2F4003FAF93 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		1B8CB7D62F92B2F4003FAF93 /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B8CB7CF2F92B2F4003FAF93 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		1B8CB7D82F92B2F4003FAF93 /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B8CB7CF2F92B2F4003FAF93 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		1B8CB7DA2F92B2F4003FAF93 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B8CB7CF2F92B2F4003FAF93 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1BE7B4A32F80D71800F7AB5A /* Project object */;
 }

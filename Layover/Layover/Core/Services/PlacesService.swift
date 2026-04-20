@@ -1,5 +1,5 @@
 //
-//  PlaceServices.swift
+//  PlacesService.swift
 //  Layover
 //
 //  Created by Maxwell Hu on 4/6/26.
@@ -8,14 +8,7 @@
 import CoreLocation
 import Foundation
 
-struct Place: Identifiable {
-    let id: String
-    let name: String
-    let address: String
-    let coordinate: CLLocationCoordinate2D
-    let rating: Double?
-    let types: [String]
-}
+// MARK: - Service
 
 class PlacesService {
 
@@ -28,22 +21,26 @@ class PlacesService {
         return key
     }()
 
+    /// Builds a Google Places photo URL from a photo resource name.
+    func photoURL(for photoName: String, maxWidth: Int = 400) -> URL? {
+        URL(string: "https://places.googleapis.com/v1/\(photoName)/media?maxWidthPx=\(maxWidth)&key=\(apiKey)")
+    }
+
+    /// Fetches up to 20 nearby places of the given type.
     func fetchNearbyPlaces(
         coordinate: CLLocationCoordinate2D,
         radiusMeters: Int,
         type: String,
         completion: @escaping (Result<[Place], Error>) -> Void
     ) {
-        let url = URL(
-            string: "https://places.googleapis.com/v1/places:searchNearby"
-        )!
+        let url = URL(string: "https://places.googleapis.com/v1/places:searchNearby")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(apiKey, forHTTPHeaderField: "X-Goog-Api-Key")
         request.setValue(
-            "places.id,places.displayName,places.formattedAddress,places.location,places.rating,places.types",
+            "places.id,places.displayName,places.formattedAddress,places.location,places.rating,places.types,places.photos",
             forHTTPHeaderField: "X-Goog-FieldMask"
         )
 
@@ -58,27 +55,23 @@ class PlacesService {
                     "radius": Double(radiusMeters),
                 ]
             ],
-            "maxResultCount": 10,
+            "maxResultCount": 20,
         ]
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             if let error {
-                completion(.failure(error))
-                return
+                completion(.failure(error)); return
             }
             guard let data else {
-                completion(.failure(PlacesError.noData))
-                return
+                completion(.failure(PlacesError.noData)); return
             }
             do {
-                let response = try JSONDecoder().decode(
-                    PlacesNewResponse.self,
-                    from: data
-                )
+                let response = try JSONDecoder().decode(PlacesNewResponse.self, from: data)
                 let places = (response.places ?? []).map { p in
-                    Place(
+                    let photo = p.photos?.first.flatMap { self?.photoURL(for: $0.name) }
+                    return Place(
                         id: p.id,
                         name: p.displayName.text,
                         address: p.formattedAddress ?? "No address",
@@ -87,7 +80,8 @@ class PlacesService {
                             longitude: p.location.longitude
                         ),
                         rating: p.rating,
-                        types: p.types ?? []
+                        types: p.types ?? [],
+                        photoURL: photo
                     )
                 }
                 completion(.success(places))
@@ -104,7 +98,7 @@ enum PlacesError: Error {
     case noData
 }
 
-// MARK: - Decodable structs (matches Places API New JSON)
+// MARK: - Private Decodable Structs
 
 private struct PlacesNewResponse: Decodable {
     let places: [PlaceResult]?
@@ -117,6 +111,7 @@ private struct PlaceResult: Decodable {
     let location: LatLng
     let rating: Double?
     let types: [String]?
+    let photos: [PhotoRef]?
 }
 
 private struct DisplayName: Decodable {
@@ -126,4 +121,8 @@ private struct DisplayName: Decodable {
 private struct LatLng: Decodable {
     let latitude: Double
     let longitude: Double
+}
+
+private struct PhotoRef: Decodable {
+    let name: String
 }
