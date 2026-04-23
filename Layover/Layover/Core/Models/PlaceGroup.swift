@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-/// Grouping bucket for results: best / tight / too far.
 enum PlaceGroup: String, CaseIterable {
     case bestOptions  = "Best Options"
     case tightTiming  = "Tight Timing"

@@ -52,7 +52,6 @@ struct ItineraryView: View {
         }
     }
 
-    // MARK: - Empty State
 
     private var emptyState: some View {
         VStack(spacing: 16) {
@@ -72,7 +71,6 @@ struct ItineraryView: View {
         .frame(maxWidth: .infinity)
     }
 
-    // MARK: - Content
 
     private var itineraryContent: some View {
         ScrollView {
@@ -86,7 +84,6 @@ struct ItineraryView: View {
         }
     }
 
-    // MARK: - Summary Card
 
     private var summaryCard: some View {
         VStack(spacing: 12) {
@@ -142,7 +139,6 @@ struct ItineraryView: View {
         .frame(maxWidth: .infinity)
     }
 
-    // MARK: - Timeline
 
     private var timelineSection: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -274,7 +270,6 @@ struct ItineraryView: View {
         }
     }
 
-    // MARK: - Notification Card
 
     private var notificationCard: some View {
         VStack(spacing: 10) {
@@ -312,7 +307,6 @@ struct ItineraryView: View {
     }
 }
 
-// MARK: - UIKit Share Sheet wrapper
 
 struct ActivityView: UIViewControllerRepresentable {
     let items: [Any]

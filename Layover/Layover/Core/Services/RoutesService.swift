@@ -8,7 +8,6 @@
 import CoreLocation
 import Foundation
 
-// MARK: - Service
 
 class RoutesService {
 
@@ -21,7 +20,6 @@ class RoutesService {
         return key
     }()
 
-    /// Simple one-way travel time in seconds between two coordinates.
     func fetchTravelSeconds(
         from origin: CLLocationCoordinate2D,
         to destination: CLLocationCoordinate2D,
@@ -53,7 +51,6 @@ class RoutesService {
         }.resume()
     }
 
-    /// Checks if a round-trip (+ stay) fits within the play window.
     func checkTravelTime(
         from origin: CLLocationCoordinate2D,
         to destination: CLLocationCoordinate2D,
@@ -120,7 +117,6 @@ class RoutesService {
         }.resume()
     }
 
-    // MARK: - Formatting
 
     private static func formatDuration(_ seconds: Int) -> String {
         let mins = seconds / 60
@@ -138,14 +134,11 @@ class RoutesService {
     }
 }
 
-// MARK: - Error
-
 enum RoutesServiceError: Error {
     case noData
     case noRoute
 }
 
-// MARK: - Private Decodable Structs
 
 private struct RoutesResponse: Decodable {
     let routes: [RouteData]?

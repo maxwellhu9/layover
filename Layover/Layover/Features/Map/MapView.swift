@@ -28,7 +28,6 @@ struct MapView: View {
         }
     }
 
-    // MARK: - Annotations
 
     private var airportAnnotation: some MapContent {
         Annotation("You", coordinate: vm.userCoordinate) {
@@ -58,7 +57,6 @@ struct MapView: View {
         }
     }
 
-    // MARK: - Legend
 
     private var legendBar: some View {
         HStack(spacing: 16) {
@@ -82,7 +80,6 @@ struct MapView: View {
         .padding(.trailing, 12).padding(.top, 8)
     }
 
-    // MARK: - Helpers
 
     private func pinColor(for row: PlaceRow) -> Color {
         guard row.fits else { return AppTheme.danger }

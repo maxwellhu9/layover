@@ -11,8 +11,6 @@ import Foundation
 import SwiftUI
 import UserNotifications
 
-/// Manages the current itinerary (local-first). Persists to UserDefaults
-/// so it survives app restarts without requiring auth.
 @MainActor
 class ItineraryService: ObservableObject {
 
@@ -26,7 +24,7 @@ class ItineraryService: ObservableObject {
 
     private init() { load() }
 
-    // MARK: - Computed
+
 
     var returnToAirportMinutes: Int {
         items.last?.travelMinutes ?? 0
@@ -48,7 +46,6 @@ class ItineraryService: ObservableObject {
 
     private let routesService = RoutesService()
 
-    // MARK: - Add a place
 
     func addPlace(_ place: PlaceRow, travelSeconds: Int, stayMinutes: Int = 30) {
         guard !items.contains(where: { $0.placeId == place.id }) else { return }
@@ -92,7 +89,6 @@ class ItineraryService: ObservableObject {
         save()
     }
 
-    // MARK: - Remove
 
     func removeItem(at offsets: IndexSet) {
         items.remove(atOffsets: offsets)
@@ -106,7 +102,6 @@ class ItineraryService: ObservableObject {
         save()
     }
 
-    // MARK: - Reorder
 
     func move(from source: IndexSet, to destination: Int) {
         items.move(fromOffsets: source, toOffset: destination)
@@ -114,7 +109,6 @@ class ItineraryService: ObservableObject {
         save()
     }
 
-    // MARK: - Update stay duration
 
     func updateDuration(id: UUID, minutes: Int) {
         if let idx = items.firstIndex(where: { $0.id == id }) {
@@ -123,14 +117,12 @@ class ItineraryService: ObservableObject {
         }
     }
 
-    // MARK: - Clear
 
     func clearAll() {
         items.removeAll()
         save()
     }
 
-    // MARK: - Share text
 
     func shareText(departureTime: Date) -> String {
         let df = DateFormatter()
@@ -143,7 +135,7 @@ class ItineraryService: ObservableObject {
         var currentTime = Date()
         for (i, item) in items.enumerated() {
             if item.travelSeconds > 0 {
-                text += "🚗 \(item.travelMinutes) min drive\n"
+                text += " \(item.travelMinutes) min drive\n"
                 currentTime = currentTime.addingTimeInterval(Double(item.travelSeconds))
             }
             let tf = DateFormatter()
@@ -155,7 +147,7 @@ class ItineraryService: ObservableObject {
         }
 
         if returnToAirportMinutes > 0 {
-            text += "🚗 \(returnToAirportMinutes) min drive back to airport\n"
+            text += " \(returnToAirportMinutes) min drive back to airport\n"
         }
 
         text += "───────────────\n"
@@ -164,7 +156,6 @@ class ItineraryService: ObservableObject {
         return text
     }
 
-    // MARK: - Local Notifications
 
     func scheduleDepartureReminder(departureTime: Date, bufferMinutes: Int = 90) {
         let center = UNUserNotificationCenter.current()
@@ -215,7 +206,6 @@ class ItineraryService: ObservableObject {
         }
     }
 
-    // MARK: - Persistence (UserDefaults)
 
     private func save() {
         if let data = try? JSONEncoder().encode(items) {

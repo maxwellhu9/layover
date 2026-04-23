@@ -8,7 +8,6 @@
 import CoreLocation
 import Foundation
 
-// MARK: - Service
 
 class PlacesService {
 
@@ -21,12 +20,10 @@ class PlacesService {
         return key
     }()
 
-    /// Builds a Google Places photo URL from a photo resource name.
     func photoURL(for photoName: String, maxWidth: Int = 400) -> URL? {
         URL(string: "https://places.googleapis.com/v1/\(photoName)/media?maxWidthPx=\(maxWidth)&key=\(apiKey)")
     }
 
-    /// Fetches up to 20 nearby places of the given type.
     func fetchNearbyPlaces(
         coordinate: CLLocationCoordinate2D,
         radiusMeters: Int,
@@ -59,6 +56,7 @@ class PlacesService {
         ]
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        
 
         URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             if let error {
@@ -67,6 +65,10 @@ class PlacesService {
             guard let data else {
                 completion(.failure(PlacesError.noData)); return
             }
+            
+            print("Places API response: \(String(data: data, encoding: .utf8) ?? "nil")")
+            
+            
             do {
                 let response = try JSONDecoder().decode(PlacesNewResponse.self, from: data)
                 let places = (response.places ?? []).map { p in
@@ -92,13 +94,13 @@ class PlacesService {
     }
 }
 
-// MARK: - Error
+
 
 enum PlacesError: Error {
     case noData
 }
 
-// MARK: - Private Decodable Structs
+
 
 private struct PlacesNewResponse: Decodable {
     let places: [PlaceResult]?

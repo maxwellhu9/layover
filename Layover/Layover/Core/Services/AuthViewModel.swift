@@ -28,7 +28,6 @@ class AuthViewModel: ObservableObject {
         Task { await restoreSession() }
     }
 
-    // MARK: - Restore Session
 
     func restoreSession() async {
         do {
@@ -43,7 +42,6 @@ class AuthViewModel: ObservableObject {
         }
     }
 
-    // MARK: - Sign Up
 
     func signUp(email: String, password: String, name: String) async {
         isLoading = true
@@ -68,7 +66,6 @@ class AuthViewModel: ObservableObject {
         isLoading = false
     }
 
-    // MARK: - Sign In
 
     func signIn(email: String, password: String) async {
         isLoading = true
@@ -87,7 +84,6 @@ class AuthViewModel: ObservableObject {
         isLoading = false
     }
 
-    // MARK: - Sign Out
 
     func signOut() async {
         do {
@@ -101,7 +97,6 @@ class AuthViewModel: ObservableObject {
         userId = nil
     }
 
-    // MARK: - Helpers
 
     private func applySession(_ session: Session) {
         isSignedIn = true

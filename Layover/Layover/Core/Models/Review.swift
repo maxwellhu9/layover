@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// A user review for a specific place, stored in Supabase.
 struct Review: Codable, Identifiable {
     let id: UUID?
     let userId: UUID

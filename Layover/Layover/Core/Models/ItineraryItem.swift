@@ -8,7 +8,6 @@
 import CoreLocation
 import Foundation
 
-/// A single stop in an itinerary.
 struct ItineraryItem: Identifiable, Codable {
     var id: UUID
     var placeId: String

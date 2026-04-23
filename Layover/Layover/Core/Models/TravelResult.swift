@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// One-way travel data with a round-trip feasibility check.
 struct TravelResult {
     let durationSeconds: Int   // one-way seconds
     let durationText: String   // e.g. "15 mins"

@@ -38,7 +38,7 @@ struct SavedView: View {
         }
     }
 
-    // MARK: - Sign In Prompt
+
 
     private var signInPrompt: some View {
         VStack(spacing: 16) {
@@ -57,7 +57,7 @@ struct SavedView: View {
         }
     }
 
-    // MARK: - Empty State
+
 
     private var emptyState: some View {
         VStack(spacing: 16) {
@@ -76,7 +76,6 @@ struct SavedView: View {
         }
     }
 
-    // MARK: - Favorites List
 
     private var favoritesList: some View {
         ScrollView {
@@ -96,7 +95,6 @@ struct SavedView: View {
         }
     }
 
-    /// Convert a Favorite to a PlaceRow for the detail sheet
     private func placeRow(from fav: Favorite) -> PlaceRow {
         PlaceRow(
             id: fav.placeId,

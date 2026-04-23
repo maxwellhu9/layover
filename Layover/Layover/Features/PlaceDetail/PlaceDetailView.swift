@@ -75,7 +75,6 @@ struct PlaceDetailView: View {
         .presentationDragIndicator(.visible)
     }
 
-    // MARK: - Hero Section (photo or map)
 
     private var heroSection: some View {
         ZStack(alignment: .bottomLeading) {
@@ -125,7 +124,6 @@ struct PlaceDetailView: View {
         .allowsHitTesting(false)
     }
 
-    // MARK: - Details
 
     private var details: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -138,7 +136,6 @@ struct PlaceDetailView: View {
         }
     }
 
-    // MARK: - Status Banner
 
     private var statusBanner: some View {
         HStack(spacing: 10) {
@@ -155,7 +152,7 @@ struct PlaceDetailView: View {
         .background(groupColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 14))
     }
 
-    // MARK: - Add to Trip
+
 
     private var addToItineraryButton: some View {
         Button {
@@ -171,7 +168,6 @@ struct PlaceDetailView: View {
         }
     }
 
-    // MARK: - Trip Breakdown
 
     private var tripBreakdown: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -206,7 +202,6 @@ struct PlaceDetailView: View {
         }
     }
 
-    // MARK: - Info
 
     private var infoSection: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -237,7 +232,7 @@ struct PlaceDetailView: View {
         }
     }
 
-    // MARK: - Reviews Section
+
 
     private var reviewsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -291,7 +286,6 @@ struct PlaceDetailView: View {
         .shadow(color: .black.opacity(0.04), radius: 6, y: 2)
     }
 
-    // MARK: - Review Form
 
     private var reviewForm: some View {
         VStack(spacing: 12) {
@@ -352,7 +346,6 @@ struct PlaceDetailView: View {
         .background(AppTheme.primaryLight.opacity(0.5), in: RoundedRectangle(cornerRadius: 12))
     }
 
-    // MARK: - Review Card
 
     private func reviewCard(_ review: Review) -> some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -381,7 +374,6 @@ struct PlaceDetailView: View {
         .background(Color(.systemGray6), in: RoundedRectangle(cornerRadius: 10))
     }
 
-    // MARK: - Actions
 
     private var actionButtons: some View {
         VStack(spacing: 10) {

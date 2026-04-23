@@ -23,7 +23,6 @@ class ReviewsService: ObservableObject {
 
     private init() {}
 
-    // MARK: - Fetch reviews for a place
 
     func fetchReviews(placeId: String) async {
         currentPlaceId = placeId
@@ -51,7 +50,6 @@ class ReviewsService: ObservableObject {
         isLoading = false
     }
 
-    // MARK: - Submit a review
 
     func submitReview(placeId: String, rating: Int, text: String) async -> Bool {
         guard let session = try? await supabase.auth.session else { return false }
@@ -82,7 +80,6 @@ class ReviewsService: ObservableObject {
         }
     }
 
-    // MARK: - Delete own review
 
     func deleteReview(id: UUID, placeId: String) async {
         do {

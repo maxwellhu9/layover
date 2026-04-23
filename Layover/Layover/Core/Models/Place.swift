@@ -7,7 +7,6 @@
 
 import CoreLocation
 
-/// Raw place data returned from the Google Places API.
 struct Place: Identifiable {
     let id: String
     let name: String

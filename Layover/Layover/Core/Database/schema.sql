@@ -1,6 +1,6 @@
 -- ==============================================
 -- Layover — Supabase Database Setup
--- Run this in your Supabase SQL Editor
+-- Run this in Supabase SQL Editor
 -- ==============================================
 
 -- 1. Profiles (auto-created on sign-up via trigger)

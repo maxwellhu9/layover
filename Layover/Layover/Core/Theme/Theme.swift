@@ -51,7 +51,6 @@ enum AppTheme {
     static let smallRadius: CGFloat = 12
 }
 
-// MARK: - Card Modifier
 
 struct CardStyle: ViewModifier {
     var padding: CGFloat = 16
@@ -70,7 +69,6 @@ extension View {
     }
 }
 
-// MARK: - Primary Button Style
 
 struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {

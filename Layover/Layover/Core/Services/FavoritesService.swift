@@ -10,7 +10,6 @@ import CoreLocation
 import Foundation
 import Supabase
 
-// MARK: - Favorite Model (matches Supabase `favorites` table)
 
 struct Favorite: Codable, Identifiable {
     let id: UUID?
@@ -38,7 +37,6 @@ struct Favorite: Codable, Identifiable {
     }
 }
 
-// MARK: - Service
 
 @MainActor
 class FavoritesService: ObservableObject {
@@ -53,7 +51,6 @@ class FavoritesService: ObservableObject {
 
     private init() {}
 
-    // MARK: - Fetch
 
     func fetchFavorites() async {
         guard let userId = try? await supabase.auth.session.user.id else { return }
@@ -77,7 +74,6 @@ class FavoritesService: ObservableObject {
         isLoading = false
     }
 
-    // MARK: - Add
 
     func addFavorite(place: PlaceRow, category: String?) async {
         guard let userId = try? await supabase.auth.session.user.id else { return }
@@ -108,7 +104,6 @@ class FavoritesService: ObservableObject {
         }
     }
 
-    // MARK: - Remove
 
     func removeFavorite(placeId: String) async {
         guard let userId = try? await supabase.auth.session.user.id else { return }
@@ -128,7 +123,6 @@ class FavoritesService: ObservableObject {
         }
     }
 
-    // MARK: - Toggle
 
     func toggleFavorite(place: PlaceRow, category: String?) async {
         if favoriteIDs.contains(place.id) {

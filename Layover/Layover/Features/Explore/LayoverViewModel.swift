@@ -10,13 +10,12 @@ import CoreLocation
 import MapKit
 import SwiftUI
 
-/// Central view-model shared across the app. Owns departure state,
-/// search results, and grouping logic.
+
 class LayoverViewModel: ObservableObject {
 
     static let shared = LayoverViewModel()
 
-    // MARK: - Published State
+
 
     @Published var rows: [PlaceRow] = []
     @Published var isLoading = false
@@ -29,7 +28,7 @@ class LayoverViewModel: ObservableObject {
     @Published var boardingBufferMinutes: Int = 90
     @Published var customSearchRadius: Int? = nil  // nil = auto
 
-    // MARK: - Dependencies
+
 
     let locationManager = LocationManager()
 
@@ -37,7 +36,7 @@ class LayoverViewModel: ObservableObject {
     private let routesService = RoutesService()
     private var timer: AnyCancellable?
 
-    // MARK: - Init
+
 
     private init() {
         timer = Timer.publish(every: 1, on: .main, in: .common)
@@ -49,7 +48,7 @@ class LayoverViewModel: ObservableObject {
         locationManager.startUpdating()
     }
 
-    // MARK: - Computed — Time
+
 
     var playWindowSeconds: Int {
         max(0, Int(departureTime.timeIntervalSince(tick) - Double(boardingBufferMinutes) * 60))
@@ -118,7 +117,7 @@ class LayoverViewModel: ObservableObject {
         return rem > 0 ? "\(hrs)h \(rem)m" : "\(hrs)h"
     }
 
-    // MARK: - Computed — Grouped Results
+
 
     var bestOptions: [PlaceRow] {
         rows.filter { row in
@@ -152,7 +151,7 @@ class LayoverViewModel: ObservableObject {
         locationManager.lastLocation != nil
     }
 
-    // MARK: - Computed — Summary
+
 
     var summaryText: String {
         if rows.isEmpty { return "No results yet" }
@@ -178,7 +177,7 @@ class LayoverViewModel: ObservableObject {
         return AppTheme.danger
     }
 
-    // MARK: - Actions
+
 
     func loadPlaces() {
         isLoading = true

@@ -49,7 +49,6 @@ struct ExploreView: View {
         }
     }
 
-    // MARK: - Header
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -78,7 +77,7 @@ struct ExploreView: View {
         }
     }
 
-    // MARK: - Time Card (with subtle shadow)
+
 
     private var timeCard: some View {
         VStack(spacing: 16) {
@@ -132,7 +131,6 @@ struct ExploreView: View {
         .shadow(color: .black.opacity(0.08), radius: 12, y: 4)
     }
 
-    // MARK: - Categories
 
     private var categorySection: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -224,7 +222,6 @@ struct ExploreView: View {
         }
     }
 
-    // MARK: - Search Button
 
     private var searchButton: some View {
         Button {
@@ -244,7 +241,6 @@ struct ExploreView: View {
         }
     }
 
-    // MARK: - Tips
 
     private var tipsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -258,7 +254,6 @@ struct ExploreView: View {
         }
     }
 
-    // MARK: - Radius Picker Sheet
 
     private var radiusPickerSheet: some View {
         NavigationStack {

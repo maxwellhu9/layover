@@ -7,7 +7,6 @@
 
 import CoreLocation
 
-/// A place combined with its travel-time data, ready for display.
 struct PlaceRow: Identifiable {
     let id: String
     let name: String

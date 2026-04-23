@@ -35,7 +35,7 @@ struct ResultsView: View {
         }
     }
 
-    // MARK: - View Toggle
+
 
     private var viewToggle: some View {
         HStack(spacing: 0) {
@@ -74,7 +74,6 @@ struct ResultsView: View {
         .background(AppTheme.primaryLight, in: Capsule())
     }
 
-    // MARK: - List
 
     private var listContent: some View {
         ScrollView {
@@ -101,7 +100,7 @@ struct ResultsView: View {
         }
     }
 
-    // MARK: - Summary Card
+
 
     private var summaryCard: some View {
         HStack(spacing: 14) {
@@ -121,7 +120,6 @@ struct ResultsView: View {
         .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
     }
 
-    // MARK: - Group Section
 
     private func groupSection(group: PlaceGroup, places: [PlaceRow]) -> some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -143,7 +141,6 @@ struct ResultsView: View {
         }
     }
 
-    // MARK: - Loading / Empty
 
     private var loadingView: some View {
         VStack(spacing: 16) {
@@ -170,7 +167,6 @@ struct ResultsView: View {
     }
 }
 
-// MARK: - Place Card (with photo)
 
 struct PlaceCard: View {
     let place: PlaceRow

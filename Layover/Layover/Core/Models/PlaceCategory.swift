@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-/// Selectable place categories mapped to Google Places API types.
 enum PlaceCategory: String, CaseIterable, Identifiable {
     case attractions = "Attractions"
     case food        = "Food"
@@ -18,7 +17,6 @@ enum PlaceCategory: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
-    /// Google Places API `includedTypes` value.
     var apiType: String {
         switch self {
         case .attractions: return "tourist_attraction"
@@ -52,7 +50,6 @@ enum PlaceCategory: String, CaseIterable, Identifiable {
         }
     }
 
-    /// Default visit duration in minutes for each category.
     var defaultVisitMinutes: Int {
         switch self {
         case .attractions: return 60
@@ -64,7 +61,6 @@ enum PlaceCategory: String, CaseIterable, Identifiable {
         }
     }
 
-    /// Unsplash photo URL for category card thumbnails.
     var imageURL: URL? {
         let slug: String
         switch self {

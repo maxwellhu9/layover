@@ -8,7 +8,6 @@
 import MapKit
 import SwiftUI
 
-/// Main tab bar after onboarding — Airbnb-style clean design.
 struct RootTabView: View {
     @ObservedObject var vm: LayoverViewModel
     @ObservedObject var itinerary: ItineraryService = .shared
@@ -54,14 +53,12 @@ struct RootTabView: View {
         }
         .tint(AppTheme.primary)
         .onAppear {
-            // Airbnb-style tab bar: transparent, thin separator line only
             let appearance = UITabBarAppearance()
             appearance.configureWithTransparentBackground()
             appearance.backgroundColor = .systemBackground
             appearance.shadowImage = UIImage()
             appearance.backgroundImage = UIImage()
             
-            // Add thin top border
             let lineView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0.5))
             lineView.backgroundColor = UIColor.separator
             UIGraphicsBeginImageContext(lineView.bounds.size)
@@ -75,7 +72,6 @@ struct RootTabView: View {
     }
 }
 
-// MARK: - Full Map Tab (uses default category from Profile)
 
 struct FullMapView: View {
     @ObservedObject var vm: LayoverViewModel
@@ -216,7 +212,6 @@ struct FullMapView: View {
     }
 }
 
-// MARK: - Map Place Detail Sheet (Airbnb style)
 
 struct MapPlaceDetailSheet: View {
     let place: Place

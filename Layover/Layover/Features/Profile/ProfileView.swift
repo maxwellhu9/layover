@@ -47,7 +47,6 @@ struct ProfileView: View {
         }
     }
 
-    // MARK: - Header (Card with shadow like Airbnb profile)
 
     private var profileHeader: some View {
         VStack(spacing: 0) {
@@ -106,7 +105,6 @@ struct ProfileView: View {
         }
     }
 
-    // MARK: - Stat Column
 
     private func statColumn(value: String, label: String) -> some View {
         VStack(spacing: 4) {
@@ -120,7 +118,6 @@ struct ProfileView: View {
         .frame(maxWidth: .infinity)
     }
 
-    // MARK: - Auth Form
 
     private var authForm: some View {
         VStack(spacing: 12) {
@@ -177,7 +174,6 @@ struct ProfileView: View {
         .padding(.top, 8)
     }
 
-    // MARK: - Quick Actions (spaced rows, no dividers)
 
     private var quickActions: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -219,7 +215,6 @@ struct ProfileView: View {
         }
     }
 
-    // MARK: - Preferences (spaced rows, no dividers)
 
     private var preferencesSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -246,7 +241,6 @@ struct ProfileView: View {
         .padding(.horizontal, 20)
     }
     
-    // MARK: - Other Section
     
     private var otherSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -263,8 +257,6 @@ struct ProfileView: View {
         }
         .padding(.horizontal, 20)
     }
-
-    // MARK: - Reset & Sign Out
 
     private var resetButton: some View {
         Button { hasOnboarded = false } label: {
@@ -301,7 +293,6 @@ struct ProfileView: View {
         }
     }
 
-    // MARK: - Settings Row
 
     private func settingsRow(icon: String, label: String, value: String) -> some View {
         HStack(spacing: 16) {
@@ -329,7 +320,6 @@ struct ProfileView: View {
         .padding(.vertical, 12)
     }
 
-    // MARK: - Edit Profile Sheet
 
     private var editProfileSheet: some View {
         NavigationStack {
@@ -362,7 +352,6 @@ struct ProfileView: View {
         .presentationDetents([.medium])
     }
 
-    // MARK: - Notification Sheet
 
     private var notificationSheet: some View {
         NavigationStack {
@@ -399,7 +388,6 @@ struct ProfileView: View {
         .presentationDetents([.medium])
     }
 
-    // MARK: - Help Sheet
 
     private var helpSheet: some View {
         NavigationStack {
@@ -439,7 +427,6 @@ struct ProfileView: View {
         .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
     }
 
-    // MARK: - Buffer Picker Sheet
 
     private var bufferPickerSheet: some View {
         NavigationStack {
@@ -486,7 +473,6 @@ struct ProfileView: View {
         .presentationDetents([.medium])
     }
 
-    // MARK: - Category Picker Sheet
 
     private var categoryPickerSheet: some View {
         NavigationStack {

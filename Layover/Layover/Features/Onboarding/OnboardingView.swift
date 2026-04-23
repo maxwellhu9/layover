@@ -42,7 +42,6 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Progress Dots
 
     private var progressDots: some View {
         HStack(spacing: 8) {
@@ -56,7 +55,7 @@ struct OnboardingView: View {
         .padding(.bottom, 40)
     }
 
-    // MARK: - Auth Step
+
 
     private var authStep: some View {
         VStack(spacing: 0) {
@@ -166,7 +165,6 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Departure Step
 
     private var departureStep: some View {
         VStack(spacing: 24) {

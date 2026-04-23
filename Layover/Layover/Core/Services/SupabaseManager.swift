@@ -8,7 +8,6 @@
 import Foundation
 import Supabase
 
-/// Singleton that provides the Supabase client used across the app.
 enum SupabaseManager {
 
     static let client: SupabaseClient = {
